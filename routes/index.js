@@ -1,0 +1,31 @@
+const bodyParser = require('body-parser')
+const cors = require ('cors')
+const livros = require('./livrosRoute')
+const pessoas = require('./pessoasRoute')
+const pedidos = require('./pedidosRoute')
+const itensPedido = require('./itensPedidoRoute')
+const editoras = require('./editorasRoute')
+const autores = require('./autoresRoute')
+const enderecos = require('./enderecosRoute')
+const funcionarios = require('./funcionariosRoute')
+const usuarios = require('./usuariosRoute')
+
+
+module.exports = (server) => {
+    server.use((req, res, next) => {
+        res.header("Access-Control-Allow-Origin","*")
+        res.header("Access-Control-Allow-Methods", 'GET, PATCH, POST, DELETE')
+        server.use(cors())
+        next()
+    })
+    server.use(bodyParser.json())
+    server.use(livros)
+    server.use(pessoas)
+    server.use(pedidos)
+    server.use(itensPedido)
+    server.use(editoras)
+    server.use(autores)
+    server.use(enderecos)
+    server.use(funcionarios)
+    server.use(usuarios)
+}
